@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Recipe App</title>
+</head>
+<body>
+        <header class="header">
+            <i class="header__nav-btn fas fa-bars"></i>
+            <h1 class="header__logo">AllRecipes!</h1>
+            <i class="header__search-btn fas fa-search"></i>
+            <input type="text" class="header__search-input" placeholder="">
+        </header>
+
+        <div class="blur-bg"></div>
+
+        <main>
+            <nav class="navbar">
+                <ul class="navbar__list">
+                    <li class="navbar__item"><a onclick="change_state_navbar()">Home</a></li>
+                    <li class="navbar__item"><a>favorites</a></li>
+                    <li class="navbar__item"><a>Contacts</a></li>
+                </ul>
+            </nav>
+            <section class="recipes">
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x "></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+                <div class="recipes-container">
+                    <img src="" alt="" class="recipes__recipe-img">
+                    <p class="recipes__recipe-text"></p>
+                    <div class="recipes__goto-icon-wrapper">
+                        <i class="fas fa-angle-double-up recipes__goto-icon 2x"></i>
+                    </div>
+                </div>
+            </section>
+
+            <section class="personalize">
+                <div class="personalize-top">
+                    <h3 class="personalize__title">Personalize</h3>
+                    <i class="fas fa-times personalize__hide-btn hide-btn"></i>
+                </div>
+                <p class="personalize__text">your recommandations</p>
+                <button class="personalize__cta-btn">start personalizing</button>
+            </section>
+
+            <section class="daily-recipe">
+                <div class="daily-recipe-showcase">
+                    <p class="daily-recipe__edge-text">Recipe of the day</p>
+                </div>
+                <div class="daily-recipe-description">
+                    <p class="daily-recipe__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quidem, tempora non nostrum totam deserunt obcaecati sed iure illo suscipit culpa qui reiciendis quibusdam consequuntur consectetur vitae iste accusantium repudiandae.</p>
+                    <div class="daily-recipe__stars"></div>
+                </div>
+            </section>
+        </main>
+
+    <script src="app.js"></script>
+    <script src="https://kit.fontawesome.com/618a2644fe.js" crossorigin="anonymous"></script>
+</body>
+</html>
