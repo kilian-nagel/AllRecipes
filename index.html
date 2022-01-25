@@ -5,26 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <title>Recipe App</title>
 </head>
 <body>
+    <div class="navbar-container">
+        <div class="navbar-content">
+            <nav class="navbar">
+                <ul class="navbar__list">
+                    <li class="navbar__item"><a onclick="change_state_navbar()">Home</a></li>
+                    <li class="navbar__item"><a>favorites</a></li>
+                    <li class="navbar__item"><a>Contact</a></li>
+                </ul>
+            </nav>
+            <div class="navbar-main">
+                <div class="navbar-left">
+                    <h3 class="navbar-left-header__title">Discover more</h3>
+                </div>
+                <div class="navbar-right">
+                    <h3 class="navbar-right-header__title">About</h3>
+                </div>
+            </div>
+        </div>
+    </div>
         <header class="header">
             <i class="header__nav-btn fas fa-bars"></i>
             <h1 class="header__logo">AllRecipes!</h1>
             <i class="header__search-btn fas fa-search"></i>
             <input type="text" class="header__search-input" placeholder="">
         </header>
-
-        <div class="blur-bg"></div>
-
         <main>
-            <nav class="navbar">
-                <ul class="navbar__list">
-                    <li class="navbar__item"><a onclick="change_state_navbar()">Home</a></li>
-                    <li class="navbar__item"><a>favorites</a></li>
-                    <li class="navbar__item"><a>Contacts</a></li>
-                </ul>
-            </nav>
             <section class="recipes">
                 <div class="recipes-container">
                     <img src="" alt="" class="recipes__recipe-img">

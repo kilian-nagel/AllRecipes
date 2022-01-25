@@ -6,6 +6,7 @@
     box-sizing: border-box;
     margin:0;
     padding:0;
+    font-family: 'Fredoka One',cursive;
 }
 
 body {
@@ -27,19 +28,73 @@ a:hover {
 /* NAV
 =============== */
 
-.navbar {
+.navbar-container {
+    max-width:100%;
+    z-index:10;
+    position:absolute;
     display:none;
+    justify-content:flex-start;
+    gap:3rem;
+}
+
+.navbar-content {
+    width:100%;
+    position:fixed;
+    display:flex;
+    justify-content:space-between;
+}
+
+.navbar-main {
+    width:800px;
+    max-width:60%;
+    margin:5% auto;
+    padding:2rem;
+    border-radius: 12px;
+    display:flex;
+    background-color: rgba(255,165,0,0.8);
+}
+
+.navbar-left {
+    width:50%;
+    border-right:solid 10px rgba(255,255,255,0.5);
+    padding-right:2rem;
+}
+
+.navbar-left-header__title {
+    color:rgba(255,255,255,0.5);
+    font-size:3rem;
+}
+
+.navbar-right {
+    border-left:solid 10px rgba(255,255,255,0.5);
+    padding-left:2rem;
+    width:50%;
+}
+
+.navbar-right-header__title {
+    color:rgba(255,255,255,0.5);
+    font-size:3rem;
+}
+
+.navbar {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    top:0;
+    left:0;
+    bottom:0;
+    right:200;
     z-index: 1;
     background-color: white;
-    border-right: solid 5px rgb(220,220,220);
-    position: fixed;
-    top:0;
-    bottom: 0;
-    left:0;
-    right:0;
-    height:100vh;
-    width:200px;
-    padding:2rem;
+    text-align: center;
+    min-height:100vh;
+    max-width:250px;
+    padding:2rem 0;
+}
+
+.navbar-container {
+    display:none;
 }
 
 .navbar__list {
@@ -50,6 +105,9 @@ a:hover {
 .navbar__item {
     font-size:1.5rem;
     margin-bottom:1rem;
+}
+.navbar__item a {   
+    padding:0.20rem 0.20rem;
 }
 
 /* Header 

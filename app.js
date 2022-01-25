@@ -18,41 +18,58 @@ function query_mealDB(){
     const req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200){
-            db.all_req.push(JSON.parse(req.response));
-            db.req_done++;
-            if(db.req_done>15){
-                request_to_object();
+            let request_obj_wrapper = {};
+            let response_text = JSON.parse(req.response).meals[0];
+            let response_id = JSON.parse(req.response).meals[0].idMeal;
+            request_obj_wrapper[response_id]=[db.req_done,response_text];
+            if(req_not_already_stored(request_obj_wrapper[Object.keys(request_obj_wrapper)[0]][0])){
+                if(db.req_done<15){
+                    db.req_done++;
+                }
+                update_recipes_display(request_obj_wrapper,request_obj_wrapper[Object.keys(request_obj_wrapper)][0])
             }
-        }
+            else {
+                db.all_req[request_obj_wrapper[response_id]] = new_req;
+            }
+        };
     }
-    req.open('GET','https://www.themealdb.com/api/json/v1/1/random.php');
+    req.open('GET','https://www.themealdb.com/api/json/v1/1/random.php')
     req.send();
 }
 
-function request_to_object(){
-    for(let req of db.all_req){
-        let meal = [];
-        meal.push(req.meals[0].strCategory);
-        meal.push(req.meals[0].strMealThumb);
-        db.all_meals.push(meal);
+function req_not_already_stored(request_obj_wrapper){
+    let count = 0;
+    for(let meal in db.all_req){
+        if(meal == Object.keys(request_obj_wrapper)[0]){count++;}
     }
-    x = db.all_meals;
-    fill_text_img_of_recipes(x)
-    fill_text_img_of_daily_recipe();
+    if(count>1){
+        return false;
+    }
+    return true;
+}
+
+function update_recipes_display(request_obj_wrapper,index){
+    request_obj_wrapper = request_obj_wrapper[Object.keys(request_obj_wrapper)[0]][1];
+    console.log(request_obj_wrapper);
+    let meal = request_obj_wrapper;
+    let text = meal.strCategory;
+    let img = meal.strMealThumb;
+
+    db.all_meals.push(meal);
+    fill_text_img_of_recipes(text,img,index)
+    //fill_text_img_of_daily_recipe();
 }
 
 /* FILL HTML with DB data  
 =============== */
 
-function fill_text_img_of_recipes(x){
-    let recipes_img_elts = document.querySelectorAll('.recipes__recipe-img'); 
-    let recipes_text_elts = document.querySelectorAll('.recipes__recipe-text');
-
-    for(let i=0;i<recipes_img_elts.length;i++){
-        recipes_text_elts[i].innerHTML = x[i][0];
-        recipes_img_elts[i].src = x[i][1];
-        init_recipes_listeners(recipes_img_elts[i]);
-    }
+function fill_text_img_of_recipes(text,img,index){
+    let recipe_img = document.querySelectorAll('.recipes__recipe-img')[index]; 
+    let recipe_text = document.querySelectorAll('.recipes__recipe-text')[index];
+    console.log(recipe_img,img,index);
+    recipe_text.innerHTML = text;
+    recipe_img.src = img;
+    init_recipes_listeners(recipe_img);
 }
 
 function fill_text_img_of_daily_recipe(x){
@@ -92,7 +109,7 @@ function get_recipe_index_of_clicked_recipe(self){
     let recipes = document.querySelectorAll('.recipes-container');
     for(let i=0;i<recipes.length;i++){
         if(recipes[i]===self){
-            data = db.all_req[i].meals[0];
+            data = db.all_meals[i];
             return data;
         }
     }
@@ -155,14 +172,17 @@ function init_hideBtn_listener (self){
 }
 
 function blurring_all_bg(){
+    let body = document.querySelector('body');
+    let children = body.children;
+    let recipe_box = document.querySelector('.recipe-box');
     let header = document.querySelector('.header');
     let recipes = document.querySelector('.recipes');
     let personalize = document.querySelector('.personalize');
     let daily_recipe = document.querySelector('.daily-recipe');
     let elts = [header,recipes,personalize,daily_recipe];
-
+    
     elts.forEach((x)=>{
-        x.style.filter = 'blur(3px)';
+        x.style.filter = 'blur(20px)';
     });
 }
 
@@ -210,11 +230,13 @@ function hide_fav_icon(){
 =============== */
 
 function change_state_navbar(){
-    let navbar = document.querySelector('.navbar');
+    let navbar = document.querySelector('.navbar-container');
     let bg_blur = document.querySelector('.blur-bg');
-    console.log(navbar.style);
-    if(navbar.style.display != 'block'){
-        navbar.style.display = 'block';
+    let nav_main = document.querySelector('.navbar-main');
+    let nav_header = document.querySelector('.navbar-header');
+
+    if(navbar.style.display == 'none'){
+        navbar.style.display = 'flex';
         blurring_all_bg();
     } else {
         navbar.style.display = 'none';
@@ -225,8 +247,27 @@ function change_state_navbar(){
 /* Favorite Recipes
 =============== */
 
+function hide_content_for_fav_meals(){
+    let recipes = document.querySelector('.recipes');
+    let personalize = document.querySelector('.personalize');
+    let daily_recipe = document.querySelector('.daily-recipe');
+    let elts = [header,recipes,personalize,daily_recipe];
+
+    elts.forEach((x)=>{
+        x.style.display = 'none';
+    })
+}
+
+function show_favorite_meals(){
+    let body = document.querySelector('body');
+    hide_content_for_fav_meals();
+    let html = create_fav_meal_innerhtml();
+    body.appendChild(html);
+}
+
 function create_fav_meal_innerhtml(){
     let innerhtml = "<div class='fav-meals-container'><section class='fav-meals-header'><h2 class='fav-meals-header__title'>Favorite meals</h2></section><section class='fav-meals'><div class='fav-meals__container'><div class='fav-meals-left'><h3 class='fav-meals__title'>Title</h3><p class='fav-meals__subtitle'>Subtitle</p></div><div class='fav-meals-right'><img class='fav-meals__img'></div></div></section><section class='specific-meal'><div class='specific-meal-header'><h3 class='specific-meal__title'></h3><img class='specific-meal__img'></div></div><div class='specific-meal-ingredients'>Ingredients</div><div class='specific-meal-preparation'>Preparations</div></section></div>";
+    return innerhtml;
 }
 
 function add_fav_meal(){
@@ -248,38 +289,11 @@ function init_all_listeners(){
     menu_btn.addEventListener('click',change_state_navbar);
 }
 
-/* REQUESTS
-=============== */
-
-function request_specific_things(resolve){
-    const req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200){
-            db.all_req.push(JSON.parse(req.response));
-            console.log(db.all_req);
-            resolve('hello');
-        }
-    }
-    req.open('GET','https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata');
-    req.send();
-}
-
-function request_new_text_img(){
-    const req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200){
-            return req.response;
-        }
-    }
-    req.open('GET','https://www.themealdb.com/api/json/v1/1/random.php');
-    req.send();
-}
-
 /* MAIN
 =============== */
 
 function main(){
-    for(let i=0;i<16;i++){
+    for(let i=0;i<15;i++){
         query_mealDB();
         init_all_listeners();
     }
